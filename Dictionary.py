@@ -1,4 +1,5 @@
 import pickle
+import random
 
 
 def dic():
@@ -47,6 +48,18 @@ def reset_dic():
         pickle.dump({
             "dictionary": {},
             "list": []
+        }, file)
+
+
+def shuffle_dic():
+    with open("dic.dat", "rb") as file:
+        pack = pickle.load(file)
+        lst, dictionary = pack["list"], pack["dictionary"]
+        random.shuffle(lst)
+    with open("dic.dat", "wb") as file:
+        pickle.dump({
+            "dictionary": dictionary,
+            "list": lst
         }, file)
 
 

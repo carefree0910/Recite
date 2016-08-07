@@ -1,6 +1,9 @@
 import tkinter as tk
+import tkinter.messagebox as tkm
 
 from Dictionary import *
+
+DISPLAY_RECITE_NUM = 3
 
 
 class GUI(tk.Frame):
@@ -57,6 +60,7 @@ class GUI(tk.Frame):
 
         tk.Frame.__init__(self)
         self.master.title("Recite!")
+        self.master.protocol("WM_DELETE_WINDOW", self.close_gui)
 
         self.wrapper_frame = tk.LabelFrame()
         self.recite_frame = tk.LabelFrame(self.wrapper_frame, text="Recite here!")
@@ -68,7 +72,7 @@ class GUI(tk.Frame):
         self.add_frame.grid(row=1, columnspan=2)
         self.check_frame.grid(row=2, column=0)
 
-        self.recite_num = 3
+        self.recite_num = DISPLAY_RECITE_NUM
 
         # ==============================================================================================================
         # Initialize Icons
@@ -193,7 +197,7 @@ class GUI(tk.Frame):
         self.check_accent.grid(row=1, column=6)
 
         # Logo
-        self.logo = tk.Button(self.wrapper_frame, image=self.logo_pic, width=130, bd=0)
+        self.logo = tk.Button(self.wrapper_frame, image=self.logo_pic, width=160, bd=0, command=self.shuffle)
         self.logo.grid(row=2, column=1)
 
         # Binding
@@ -203,6 +207,10 @@ class GUI(tk.Frame):
 
         # Initialize
         GUI.focus_and_select(self.add_word)()
+
+    def shuffle(self):
+        shuffle_dic()
+        self.refresh_recite()
 
     def refresh_recite(self):
         with open("dic.dat", "rb") as file:
@@ -217,6 +225,9 @@ class GUI(tk.Frame):
                     self.recite_words[i]["text"] = ""
                     self.recite_accent_packs[i]["message"] = ""
                     self.recite_meaning_packs[i]["message"] = ""
+
+                self.recite_accents[i]["text"] = ""
+                self.recite_meanings[i]["text"] = ""
 
     @staticmethod
     def show_hide_info(pack):
@@ -236,7 +247,6 @@ class GUI(tk.Frame):
                         for key, data in pack.items() if key != "idx"}
             if category == "confirm":
                 rotate_list(pack["idx"])
-                self.refresh_recite()
             elif category == "modify":
                 try:
                     dictionary = dic()
@@ -245,10 +255,10 @@ class GUI(tk.Frame):
                 except StopIteration:
                     pass
                 finally:
-                    self.refresh_recite()
+                    pass
             else:
                 delete_word(new_pack["word"])
-                self.refresh_recite()
+            self.refresh_recite()
         return sub
 
     def finish_add(self):
@@ -282,3 +292,11 @@ class GUI(tk.Frame):
             entry.select_from(0)
             entry.select_to(tk.END)
         return sub
+
+    def close_gui(self):
+        result = tkm.askokcancel("made by carefree0910", "Backup?")
+        if result:
+            with open("backup.dat", "wb") as file:
+                with open("dic.dat", "rb") as f:
+                    pickle.dump(pickle.load(f), file)
+        self.master.destroy()
