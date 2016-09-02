@@ -1,0 +1,17 @@
+<ion-view view-title="{{lang(localInfo.lang).add.viewTitle}}">
+    <ion-nav-buttons side="secondary">
+        <div class="buttons">
+            <button class="button button-icon icon ion-ios-compose-outline" ng-click="doAdd()"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <form class="card" ng-submit="doAdd()">
+            <button ng-show="false"></button>
+            <div class="item item-divider"> {{form.title}} </div>
+            <div ng-repeat="content in form.contents" class="list list-inset">
+                <label class="item item-input item-text-wrap"> <span class="input-label">{{content.title}}</span>
+                    <input type="text" ng-model="template[content.idx]"> </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

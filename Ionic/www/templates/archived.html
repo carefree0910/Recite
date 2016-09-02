@@ -1,0 +1,24 @@
+<ion-view view-title="{{lang(localInfo.lang).archived.viewTitle}}">
+    <ion-nav-buttons side="secondary">
+        <div class="buttons">
+            <button class="button button-icon icon ion-ios-search" ng-click="dt.doFilter()"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <form class="card" ng-submit="dt.doFilter()">
+            <button ng-show="false"> </button>
+            <label class="item item-input">
+                <input type="text" ng-model="dt.filter" />
+            </label>
+        </form>
+        <ion-list>
+            <ion-item ng-repeat="word in dt.rs track by $index">
+                <span class="word-title">{{word.name}}</span>
+                <span class="badge badge-header">{{getTypes(word.meanings)}}</span>
+                <ion-option-button class="button-calm" ng-click="doPutBack(word.id)"><span><i class="icon ion-reply"></i> {{lang(localInfo.lang).archived.putBack}} </span></ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="doDel(word.id)"><span><i class="icon ion-trash-a"></i> {{lang(localInfo.lang).archived.delete}} </span></ion-option-button>
+            </ion-item>
+        </ion-list>
+        <br> <br> <br>
+    </ion-content>
+</ion-view>

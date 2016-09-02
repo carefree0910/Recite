@@ -1,0 +1,42 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">{{lang(localInfo.lang).setting.title}}</h1>
+        <div class="buttons">
+            <button class="button button-nav" ng-click="doSetting()"><i class="icon ion-android-done"></i></button>
+        </div>
+        <div class="buttons">
+            <button class="button button-nav" ng-click="closeSetting()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doSetting()">
+            <button ng-show="false"> </button>
+            <div class="list">
+                <label class="item item-input item-select">
+                    <span class="input-label bold">{{lang(localInfo.lang).setting.lang}}</span>
+                    <select ng-model="tmpInfo.lang">
+                        <option value="zh_cn">中文</option>
+                        <option value="en">English</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label bold">{{lang(localInfo.lang).setting.avatar}}</span>
+                    <img class="padding" ng-src="{{tmpInfo.icon}}">
+                </label>
+                <div class="button-bar">
+                    <button class="button button-light" type="button" ng-click="takePicture()">
+                        <i class="icon ion-camera"></i>
+                    </button>
+                    <button class="button button-light" type="button" ng-click="getPicture()">
+                        <i class="icon ion-images"></i>
+                    </button>
+                </div>
+                <label class="item item-input">
+                    <span class="input-label bold">{{lang(localInfo.lang).setting.username}}</span>
+                    <input type="text" ng-model="tmpInfo.username">
+                </label>
+            </div>
+        </form>
+        <br> <br> <br>
+    </ion-content>
+</ion-modal-view>

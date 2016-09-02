@@ -1,0 +1,33 @@
+<ion-view cache-view="false" view-title="{{lang(localInfo.lang).detail.viewTitle}}">
+    <ion-nav-buttons side="secondary">
+        <div class="buttons">
+            <button class="button button-icon icon ion-ios-compose-outline" ng-click="finishEdit()"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <form class="card" ng-submit="finishEdit()">
+            <button ng-show="false"></button>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <span class="input-label bold"> {{lang(localInfo.lang).detail.name}} </span>
+                    <input type="text" ng-model="tmp_word.name" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label bold"> {{lang(localInfo.lang).detail.hiragana}} </span>
+                    <input type="text" ng-model="tmp_word.hiragana" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label bold"> {{lang(localInfo.lang).detail.accent}} </span>
+                    <input type="text" ng-model="tmp_word.accent" />
+                </label>
+            </div>
+            <div class="list list-inset">
+                <div class="item item-input" ng-repeat="info in tmp_word.meanings track by $index">
+                    <span class="input-label bold"> {{info.type}} </span>
+                    <input type="text" ng-model="info.meaning" />
+                </div>
+            </div>
+        </form>
+        <br> <br> <br>
+    </ion-content>
+</ion-view>

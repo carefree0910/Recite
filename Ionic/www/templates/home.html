@@ -1,0 +1,27 @@
+<ion-view view-title="{{lang(localInfo.lang).home.viewTitle}}">
+    <ion-content>
+        <div class="card">
+            <div class="item item-divider">
+                {{lang(localInfo.lang).home.title}}
+            </div>
+            <ion-list>
+                <ion-item ng-repeat="word in words | wordLimitFilter: num track by $index" href="#/app/check/{{word.id}}">
+                    <span class="word-title">{{word.name}}</span>
+                    <span class="badge badge-header">{{getTypes(word.meanings)}}</span>
+                    <ion-option-button class="button-balanced" ng-click="doOK(word.id)"><span><i class="icon ion-checkmark"></i> {{lang(localInfo.lang).home.ok}} </span></ion-option-button>
+                    <ion-option-button class="button-positive" ng-click="doArchive(word.id)"><span><i class="icon ion-archive"></i> {{lang(localInfo.lang).home.archive}} </span></ion-option-button>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="card">
+            <div class="list list-inset">
+                <label class="item item-avatar">
+                    <img ng-src={{localInfo.icon}}>
+                    <p class="title">{{lang(localInfo.lang).home.username}}</p>
+                    <p class="content">{{localInfo.username}}</p>
+                </label>
+            </div>
+        </div>
+        <br> <br> <br>
+    </ion-content>
+</ion-view>
